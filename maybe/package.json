@@ -1,0 +1,23 @@
+{
+  "name": "@brixlove/maybe",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "description": "An implementation of Maybe (Or Option in some libraries)",
+  "license": "MIT",
+  "author": {
+    "name": "Gyula Laszlo"
+  },
+  "scripts":{
+    "prepublish": "npm run build",
+    "link-dev": "echo done",
+    "unlink-dev": "echo done",
+    "build": "tsc"
+  },
+  "dependencies": {
+    
+  },
+  "devDependencies": {
+    "typescript": "^2.7.0-dev.20171216"
+  }
+}
