@@ -1,9 +1,21 @@
 
 export interface Maybe<V> {
+    map<X>(f: (v: V) => X): Maybe<X>
+    chain<X>(f: (v: V) => Maybe<X>): Maybe<X>
 }
 
 export namespace maybe {
-    class Nothing implements Maybe<any> {
+    class Nothing<V> implements Maybe<V> {
+
+        map<X>(f: (v: V) => X): Maybe<X> {
+            // YUCK
+            return (this as any) as Nothing<X>;
+        }
+
+        chain<X>(f: (v: V) => Maybe<X>): Maybe<X> {
+            // YUCK
+            return (this as any) as Nothing<X>;
+        }
     }
 
     class Just<V> implements Maybe<V> {
@@ -11,6 +23,14 @@ export namespace maybe {
 
         constructor(v: V) {
             this.just = v;
+        }
+
+        map<X>(f: (v: V) => X): Maybe<X> {
+            return just(f(this.just));
+        }
+
+        chain<X>(f: (v: V) => Maybe<X>): Maybe<X> {
+            return f(this.just);
         }
     }
 
@@ -25,7 +45,7 @@ export namespace maybe {
     }
 
     export function then<V, X>(f: (v: V) => Maybe<X>, v: Maybe<V>): Maybe<X> {
-        return v instanceof Just ? f(v.just) : v;
+        return v instanceof Just ? f(v.just) : ((v as any) as Nothing<X>);
     }
 
     export function withDefault<V>(def: V, v: Maybe<V>): V {
@@ -42,5 +62,10 @@ export namespace maybe {
     }
 }
 
+/**
+ * Creates singleton / constructors
+ */
+export const nothing = maybe.nothing;
+export const just = maybe.just;
 
 export default Maybe;

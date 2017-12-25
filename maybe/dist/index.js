@@ -1,15 +1,30 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var maybe;
 (function (maybe_1) {
-    var Nothing = (function () {
+    var Nothing = /** @class */ (function () {
         function Nothing() {
         }
+        Nothing.prototype.map = function (f) {
+            // YUCK
+            return this;
+        };
+        Nothing.prototype.chain = function (f) {
+            // YUCK
+            return this;
+        };
         return Nothing;
     }());
-    var Just = (function () {
+    var Just = /** @class */ (function () {
         function Just(v) {
             this.just = v;
         }
+        Just.prototype.map = function (f) {
+            return just(f(this.just));
+        };
+        Just.prototype.chain = function (f) {
+            return f(this.just);
+        };
         return Just;
     }());
     /**
@@ -40,3 +55,8 @@ var maybe;
     }
     maybe_1.fromNullable = fromNullable;
 })(maybe = exports.maybe || (exports.maybe = {}));
+/**
+ * Creates singleton / constructors
+ */
+exports.nothing = maybe.nothing;
+exports.just = maybe.just;

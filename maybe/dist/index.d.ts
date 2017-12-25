@@ -1,4 +1,6 @@
 export interface Maybe<V> {
+    map<X>(f: (v: V) => X): Maybe<X>;
+    chain<X>(f: (v: V) => Maybe<X>): Maybe<X>;
 }
 export declare namespace maybe {
     /**
@@ -13,4 +15,9 @@ export declare namespace maybe {
     /** Returns Just `v` if v is not undefined or null, or `Nothing` otherwise */
     function fromNullable<V>(v?: V): Maybe<V>;
 }
+/**
+ * Creates singleton / constructors
+ */
+export declare const nothing: Maybe<any>;
+export declare const just: typeof maybe.just;
 export default Maybe;
