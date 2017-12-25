@@ -121,3 +121,45 @@ function rightOrThrow(x) {
     }
 }
 exports.rightOrThrow = rightOrThrow;
+/**
+ * Apply a function to two results, if both results are Ok. If not, the first argument which is an Err will propagate through.
+ */
+function map2(f, d0, d1) {
+    return chain2(function (v0, v1) { return ok(f(v0, v1)); }, d0, d1);
+}
+exports.map2 = map2;
+/**
+ * Apply a function to three results, if all results are Ok. If not, the first argument which is an Err will propagate through.
+ */
+function map3(f, d0, d1, d2) {
+    return chain3(function (v0, v1, v2) { return ok(f(v0, v1, v2)); }, d0, d1, d2);
+}
+exports.map3 = map3;
+/**
+ * Apply a function to three results, if all results are Ok. If not, the first argument which is an Err will propagate through.
+ */
+function map4(f, d0, d1, d2, d3) {
+    return chain4(function (v0, v1, v2, v3) { return ok(f(v0, v1, v2, v3)); }, d0, d1, d2, d3);
+}
+exports.map4 = map4;
+/**
+ * Chain a function with two results, if both results are Ok. If not, the first argument which is an Err will propagate through.
+ */
+function chain2(f, d0, d1) {
+    return d0.chain(function (v0) { return d1.chain(function (v1) { return f(v0, v1); }); });
+}
+exports.chain2 = chain2;
+/**
+ * Chain a function with three results, if both results are Ok. If not, the first argument which is an Err will propagate through.
+ */
+function chain3(f, d0, d1, d2) {
+    return d0.chain(function (v0) { return chain2(function (v1, v2) { return f(v0, v1, v2); }, d1, d2); });
+}
+exports.chain3 = chain3;
+/**
+ * Chain a function with four results, if both results are Ok. If not, the first argument which is an Err will propagate through.
+ */
+function chain4(f, d0, d1, d2, d3) {
+    return chain2(function (v0, v1) { return chain2(function (v2, v3) { return f(v0, v1, v2, v3); }, d2, d3); }, d0, d1);
+}
+exports.chain4 = chain4;

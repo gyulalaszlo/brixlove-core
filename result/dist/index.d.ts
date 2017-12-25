@@ -61,3 +61,27 @@ export declare function is<E, V>(x: Result<E, V>): boolean;
  * @return {V}
  */
 export declare function rightOrThrow<E, V>(x: Result<E, V>): V;
+/**
+ * Apply a function to two results, if both results are Ok. If not, the first argument which is an Err will propagate through.
+ */
+export declare function map2<E, V, X0, X1>(f: (v0: X0, v1: X1) => V, d0: Result<E, X0>, d1: Result<E, X1>): Result<E, V>;
+/**
+ * Apply a function to three results, if all results are Ok. If not, the first argument which is an Err will propagate through.
+ */
+export declare function map3<E, V, X0, X1, X2>(f: (v0: X0, v1: X1, v2: X2) => V, d0: Result<E, X0>, d1: Result<E, X1>, d2: Result<E, X2>): Result<E, V>;
+/**
+ * Apply a function to three results, if all results are Ok. If not, the first argument which is an Err will propagate through.
+ */
+export declare function map4<E, V, X0, X1, X2, X3>(f: (v0: X0, v1: X1, v2: X2, v3: X3) => V, d0: Result<E, X0>, d1: Result<E, X1>, d2: Result<E, X2>, d3: Result<E, X3>): Result<E, V>;
+/**
+ * Chain a function with two results, if both results are Ok. If not, the first argument which is an Err will propagate through.
+ */
+export declare function chain2<E, V, X0, X1>(f: (v0: X0, v1: X1) => Result<E, V>, d0: Result<E, X0>, d1: Result<E, X1>): Result<E, V>;
+/**
+ * Chain a function with three results, if both results are Ok. If not, the first argument which is an Err will propagate through.
+ */
+export declare function chain3<E, V, X0, X1, X2>(f: (v0: X0, v1: X1, v2: X2) => Result<E, V>, d0: Result<E, X0>, d1: Result<E, X1>, d2: Result<E, X2>): Result<E, V>;
+/**
+ * Chain a function with four results, if both results are Ok. If not, the first argument which is an Err will propagate through.
+ */
+export declare function chain4<E, V, X0, X1, X2, X3>(f: (v0: X0, v1: X1, v2: X2, v3: X3) => Result<E, V>, d0: Result<E, X0>, d1: Result<E, X1>, d2: Result<E, X2>, d3: Result<E, X3>): Result<E, V>;
