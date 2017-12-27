@@ -15,7 +15,8 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@brixlove/result": "^0.0.1"
+    "@brixlove/result": "^0.0.1",
+    "@brixlove/maybe": "^0.0.1"
   },
   "devDependencies": {
     "@types/chai": "^4.0.10",
